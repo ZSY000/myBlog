@@ -19,6 +19,7 @@
       </div>
       <label>Author:</label>
       <select v-model="blog.author">
+        <!-- 要绑定key -->
         <option v-for="auth in authors" :key="auth">{{auth}}</option>
       </select>
     </form>
