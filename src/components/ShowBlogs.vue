@@ -4,7 +4,9 @@
     <input type="search" v-model="keyword" placeholder="search...">
     <p v-if="filteredBlogs.length == 0">No matches found !</p>
     <div class="singleBlog" v-for="blog in filteredBlogs" :key="blog.id">
-      <h3>{{blog.title | toUpper}}</h3>
+      <router-link :to="'/blog/'+blog.id">
+        <h3>{{blog.title | toUpper}}</h3>
+      </router-link>
       <article>{{blog.body | maxContent}}</article>
     </div>
   </div>
@@ -59,5 +61,17 @@ export default {
 }
 .singleBlog h3{
   margin-top: 0;
+}
+.singleBlog a{
+  text-decoration: none;
+  color: #333;
+}
+input[type="search"]{
+  padding: 4px 4px 4px 10px;
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 </style>
