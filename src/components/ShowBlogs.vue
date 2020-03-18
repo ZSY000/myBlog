@@ -4,7 +4,7 @@
     <input type="search" v-model="keyword" placeholder="search...">
     <p v-if="filteredBlogs.length == 0">No matches found !</p>
     <div class="singleBlog" v-for="blog in filteredBlogs" :key="blog.id">
-      <router-link :to="'/blog/'+blog.id">
+      <router-link :to="'/detail/'+blog.id">
         <h3>{{blog.title | toUpper}}</h3>
       </router-link>
       <article>{{blog.body | maxContent}}</article>

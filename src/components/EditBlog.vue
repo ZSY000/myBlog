@@ -1,6 +1,6 @@
 <template>
   <div id="addBlog">
-    <h2>Add Blog</h2>
+    <h2>Edit Blog</h2>
     <form action="" v-if="!submitted">
       <label>Title:</label>
       <input type="text" v-model="blog.title" required>
@@ -46,6 +46,7 @@
 export default {
   data () {
     return {
+      id: this.$route.params.id,
       blog: {
         title: '',
         content: '',
@@ -56,18 +57,30 @@ export default {
       submitted: false
     }
   },
+  created () {
+    this.fetchData()
+  },
   methods: {
+    // 提交修改数据
     postData () {
       this.$http.post('http://jsonplaceholder.typicode.com/posts', {
         title: this.blog.title,
         body: this.blog.content,
-        userId: 1
+        userId: this.id
       }).then(function (data) {
         // console.log(data)
         this.submitted = true
         setTimeout(() => {
           this.$router.push({path: '/'})
         }, 3000)
+      })
+    },
+    // 修改数据前先获取数据
+    fetchData () {
+      this.$http.get('http://jsonplaceholder.typicode.com/posts/' + this.id).then((data) => {
+        // console.log(data)
+        this.blog.title = data.body.title
+        this.blog.content = data.body.body
       })
     }
   }
@@ -91,6 +104,7 @@ input[type="text"],textarea,select{
   display: block;
   width: 100%;
   padding: 8px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 textarea{
   height: 100px;
