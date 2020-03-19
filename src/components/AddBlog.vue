@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
@@ -58,11 +59,11 @@ export default {
   },
   methods: {
     postData () {
-      this.$http.post('http://jsonplaceholder.typicode.com/posts', {
+      axios.post('/posts', {
         title: this.blog.title,
         body: this.blog.content,
         userId: 1
-      }).then(function (data) {
+      }).then((data) => {
         // console.log(data)
         this.submitted = true
         setTimeout(() => {
@@ -91,6 +92,7 @@ input[type="text"],textarea,select{
   display: block;
   width: 100%;
   padding: 8px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 textarea{
   height: 100px;

@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'singleBlog',
   data () {
@@ -17,9 +18,10 @@ export default {
     }
   },
   created () {
-    this.$http.get('http://jsonplaceholder.typicode.com/posts/' + this.id).then((data) => {
-      console.log(data)
-      this.blog = data.body
+    // this.$http.get('http://jsonplaceholder.typicode.com/posts/' + this.id).then((data) => {
+    axios.get('/posts/' + this.id).then((data) => {
+      // console.log(data)
+      this.blog = data.data
     })
   },
   methods: {

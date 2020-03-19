@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
@@ -63,11 +64,12 @@ export default {
   methods: {
     // 提交修改数据
     postData () {
-      this.$http.post('http://jsonplaceholder.typicode.com/posts', {
+      // this.$http.post('http://jsonplaceholder.typicode.com/posts', {
+      axios.post('/posts', {
         title: this.blog.title,
         body: this.blog.content,
         userId: this.id
-      }).then(function (data) {
+      }).then((data) => { // 需要用箭头函数，否则this会指向回调函数而不是全局
         // console.log(data)
         this.submitted = true
         setTimeout(() => {
@@ -77,10 +79,11 @@ export default {
     },
     // 修改数据前先获取数据
     fetchData () {
-      this.$http.get('http://jsonplaceholder.typicode.com/posts/' + this.id).then((data) => {
+      // this.$http.get('http://jsonplaceholder.typicode.com/posts/' + this.id).then((data) => {
+      axios.get('/posts/' + this.id).then((data) => {
         // console.log(data)
-        this.blog.title = data.body.title
-        this.blog.content = data.body.body
+        this.blog.title = data.data.title
+        this.blog.content = data.data.body
       })
     }
   }

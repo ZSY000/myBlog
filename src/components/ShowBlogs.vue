@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
@@ -23,9 +24,10 @@ export default {
   methods: {
   },
   created () {
-    this.$http.get('http://jsonplaceholder.typicode.com/posts').then(function (data) {
+    // this.$http.get('http://jsonplaceholder.typicode.com/posts').then(function (data) {
+    axios.get('/posts').then((data) => {
       // console.log(data)
-      this.blogs = data.body.slice(0, 10) // 展示前10条数据
+      this.blogs = data.data.slice(0, 10) // 展示前10条数据
     })
   },
   computed: {
